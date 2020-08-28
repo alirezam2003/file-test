@@ -10,6 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +27,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         view_init();
         File dir = getFilesDir();
-        text.setText(dir.getAbsolutePath());
+        try {
+            text.setText(dir.getCanonicalPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -51,9 +58,23 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        Toast.makeText(this, "saved successfully", Toast.LENGTH_SHORT).show();
+        //CREATING THE INTERNAL FILE :)
+        creat_internal_file(name,content);
 
 
+
+    }
+
+    private void creat_internal_file(String name, String content) {
+        try {
+            FileOutputStream fos= openFileOutput(name,MODE_PRIVATE);
+            fos.write(content.getBytes());
+            fos.close();
+            Toast.makeText(this, "file just created", Toast.LENGTH_SHORT).show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void load_it(View view) {
