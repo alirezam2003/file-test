@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             text.setText(dir.getCanonicalPath());
         } catch (IOException e) {
             e.printStackTrace();
+
         }
 
 
