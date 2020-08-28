@@ -9,10 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,15 +62,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //CREATING THE INTERNAL FILE :)
-        creat_internal_file(name,content);
-
+        creat_internal_file(name, content);
 
 
     }
 
     private void creat_internal_file(String name, String content) {
         try {
-            FileOutputStream fos= openFileOutput(name,MODE_PRIVATE);
+            FileOutputStream fos = openFileOutput(name, MODE_PRIVATE);
             fos.write(content.getBytes());
             fos.close();
             Toast.makeText(this, "file just created", Toast.LENGTH_SHORT).show();
@@ -79,5 +80,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void load_it(View view) {
+        String name = inpt_name.getText().toString().replace(" ", "-");
+        if (name.isEmpty()) {
+            inpt_name.setError("fill it out...");
+            inpt_name.requestFocus();
+            read_internal_file(name);
+        }
+        String content=read_internal_file(name);
+        inpt_content.setText(content);
+
     }
+
+    private String read_internal_file(String name) {
+        try {
+            FileInputStream fis = openFileInput(name);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+            String s;
+            StringBuilder sb = new StringBuilder();
+            while ((s = br.readLine()) != null) {
+                sb.append(s + '\n');
+            }
+            br.close();
+            fis.close();
+            return sb.toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 }
