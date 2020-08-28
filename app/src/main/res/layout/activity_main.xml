@@ -27,7 +27,7 @@
         android:maxEms="50"
         android:maxHeight="30dp"
         android:maxLines="3"
-        android:maxLength="2"
+        android:maxLength="20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/inpt_name_file" />
