@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         btn_load = findViewById(R.id.btn_load);
     }
 
-    public void save_it(View view) {
+    public void save_it_internal(View view) {
         String name = inpt_name.getText().toString().replace(" ", "-");
         String content = inpt_content.getText().toString();
         if (name.isEmpty()) {

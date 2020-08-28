@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="save"
-            android:onClick="save_it"
+            android:onClick="save_it_internal"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
